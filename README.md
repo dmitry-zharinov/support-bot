@@ -43,5 +43,5 @@ $ python vk_bot.py
 
 Запустите скрипт для обучения Dialogflow, указав путь к json файлу:
 ```
-$ python train_dialogflow.py ./questions.json
+$ python dialogflow.py ./questions.json
 ```
