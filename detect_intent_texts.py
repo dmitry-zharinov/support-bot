@@ -1,10 +1,8 @@
-def detect_intent_texts(project_id, session_id, texts, language_code):
+def detect_intent_texts(project_id, session_id, texts, language_code="ru-RU"):
     from google.cloud import dialogflow
 
     session_client = dialogflow.SessionsClient()
-
     session = session_client.session_path(project_id, session_id)
-    print("Session path: {}\n".format(session))
 
     text_input = dialogflow.TextInput(
         text=texts,
@@ -24,4 +22,4 @@ def detect_intent_texts(project_id, session_id, texts, language_code):
         )
     )
 
-    return response.query_result.fulfillment_text
+    return response.query_result

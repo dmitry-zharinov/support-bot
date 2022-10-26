@@ -28,7 +28,7 @@ def echo(update: Update, context: CallbackContext):
         session_id,
         update.message.text,
         'ru-RU'
-    )
+    ).fulfillment_text
     update.message.reply_text(fulfillment_text)
 
 
