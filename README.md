@@ -17,7 +17,12 @@ pip install -r requirements.txt
 
 ### Запуск Telegram бота 
 ```
-$ python support_bot_telegram.py
+$ python telegram_bot.py
+```
+
+### Запуск бота Вконтакте 
+```
+$ python vk_bot.py
 ```
 
 ### Обучение DialogFlow 
