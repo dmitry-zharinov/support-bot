@@ -14,7 +14,26 @@ pip install -r requirements.txt
 - `DIALOGFLOW_SESSION_ID` — уникальная строка (например, имя телеграм-бота). 
 - `GOOGLE_APPLICATION_CREDENTIALS` - путь до файла с ключами в формате `.json` - [см. документацию](https://cloud.google.com/docs/authentication/client-libraries)
 
-### Запуск
+### Запуск бота
 ```
 $ python support_bot.py
+```
+
+### Обучение DialogFlow 
+Для того, чтобы обучить бота тренировочным фразам и ответам, создайте .json файл в следующем формате:
+```
+{
+    "Намерение": {
+        "questions": [
+            "Вопрос",
+        ],
+        "answer": "Ответ"
+    },
+}
+
+```
+
+Запустите скрипт для обучения Dialogflow, указав путь к json файлу:
+```
+$ python train_dialogflow.py ./questions.json
 ```
