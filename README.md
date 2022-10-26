@@ -17,7 +17,7 @@ pip install -r requirements.txt
 
 ### Запуск Telegram бота 
 ```
-$ python telegram_bot.py
+$ python tg_bot.py
 ```
 
 ### Запуск бота Вконтакте 
