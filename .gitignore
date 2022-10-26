@@ -4,3 +4,5 @@ venv
 questions.json
 __pycache__/detect_intent_texts.cpython-310.pyc
 __pycache__/dialogflow.cpython-310.pyc
+__pycache__/bot_logging.cpython-310.pyc
+__pycache__/logging.cpython-310.pyc

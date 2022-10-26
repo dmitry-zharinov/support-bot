@@ -7,6 +7,8 @@ from telegram.ext import (CallbackContext, CommandHandler, Filters,
                           MessageHandler, Updater)
 
 from dialogflow import detect_intent_texts
+from bot_logging import TelegramLogsHandler
+
 
 logger = logging.getLogger('tg-bot')
 
@@ -41,15 +43,15 @@ def run_bot(token):
 
 def main():
     load_dotenv()
+    token = os.getenv('TG_BOT_TOKEN')
+    chat_id = os.getenv('TG_CHAT_ID')
+    os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
 
-    logging.basicConfig(
-        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-        level=logging.INFO
+    logging.basicConfig(level=logging.INFO)
+    logger.addHandler(
+        TelegramLogsHandler(token, chat_id)
     )
 
-    token = os.getenv('TG_BOT_TOKEN')
-    os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
-    run_bot(token)
     try:
         run_bot(token)
     except Exception as err:

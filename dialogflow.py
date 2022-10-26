@@ -8,11 +8,6 @@ from dotenv import load_dotenv
 logger = logging.getLogger('dialogflow_bot')
 
 
-def load_json(filepath):
-    with open(filepath, "r", encoding='utf8') as file:
-        return json.loads(file.read())
-
-
 def create_intent(project_id,
                   display_name,
                   training_phrases_parts,
@@ -81,7 +76,9 @@ if __name__ == "__main__":
     args = argparser()
 
     try:
-        intents = load_json(args.path)
+        with open(args.path, "r", encoding='utf8') as file:
+            intents = json.loads(file.read())
+
     except (FileNotFoundError, PermissionError) as err:
         exit(err)
 

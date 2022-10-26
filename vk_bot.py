@@ -6,9 +6,10 @@ import vk_api as vk
 from dotenv import load_dotenv
 from vk_api.longpoll import VkEventType, VkLongPoll
 
-from detect_intent_texts import detect_intent_texts
+from dialogflow import detect_intent_texts
+from bot_logging import TelegramLogsHandler
 
-logger = logging.getLogger('vk_bot')
+logger = logging.getLogger('vk-bot')
 
 
 def answer_user(event, vk_api):
@@ -30,14 +31,17 @@ def answer_user(event, vk_api):
 
 
 if __name__ == "__main__":
-    logging.basicConfig(
-        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-        level=logging.INFO
+    load_dotenv()
+    vk_token = os.getenv('VK_GROUP_TOKEN')
+    tg_bot_token = os.getenv('TG_BOT_TOKEN')
+    tg_chat_id = os.getenv('TG_CHAT_ID')
+
+    logging.basicConfig(level=logging.INFO)
+    logger.addHandler(
+        TelegramLogsHandler(tg_bot_token, tg_chat_id)
     )
 
-    load_dotenv()
-    token = os.getenv('VK_GROUP_TOKEN')
-    vk_session = vk.VkApi(token=token)
+    vk_session = vk.VkApi(token=vk_token)
     vk_api = vk_session.get_api()
     longpoll = VkLongPoll(vk_session)
 
