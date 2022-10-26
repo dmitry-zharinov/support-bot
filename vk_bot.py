@@ -8,15 +8,10 @@ from vk_api.longpoll import VkEventType, VkLongPoll
 
 from detect_intent_texts import detect_intent_texts
 
-logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    level=logging.INFO
-)
-
 logger = logging.getLogger(__name__)
 
 
-def echo(event, vk_api):
+def answer_user(event, vk_api):
     project_id = os.getenv('DIALOGFLOW_PROJECT_ID')
     session_id = os.getenv('DIALOGFLOW_SESSION_ID')
     answer = detect_intent_texts(
@@ -35,6 +30,11 @@ def echo(event, vk_api):
 
 
 if __name__ == "__main__":
+    logging.basicConfig(
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        level=logging.INFO
+    )
+
     load_dotenv()
     token = os.getenv('VK_GROUP_TOKEN')
     vk_session = vk.VkApi(token=token)
@@ -42,11 +42,7 @@ if __name__ == "__main__":
     longpoll = VkLongPoll(vk_session)
 
     for event in longpoll.listen():
-        if event.type == VkEventType.MESSAGE_NEW:
-            print('Новое сообщение:')
-            if event.to_me:
-                print('Для меня от: ', event.user_id)
-                echo(event, vk_api)
-            else:
-                print('От меня для: ', event.user_id)
-            print('Текст:', event.text)
+        if event.type == VkEventType.MESSAGE_NEW and event.to_me:
+            logger.info(f'Новое сообщение от {event.user_id}')
+            answer_user(event, vk_api)
+            logger.info(f'Текст: {event.text}')
