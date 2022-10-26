@@ -8,7 +8,7 @@ from vk_api.longpoll import VkEventType, VkLongPoll
 
 from detect_intent_texts import detect_intent_texts
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('vk_bot')
 
 
 def answer_user(event, vk_api):
@@ -43,6 +43,6 @@ if __name__ == "__main__":
 
     for event in longpoll.listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me:
-            logger.info(f'Новое сообщение от {event.user_id}')
+            logger.info(f'New message from {event.user_id}')
             answer_user(event, vk_api)
-            logger.info(f'Текст: {event.text}')
+            logger.info(f'Message text: {event.text}')

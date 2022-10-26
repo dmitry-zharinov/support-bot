@@ -3,3 +3,4 @@ venv
 .vscode/settings.json
 questions.json
 __pycache__/detect_intent_texts.cpython-310.pyc
+__pycache__/dialogflow.cpython-310.pyc
