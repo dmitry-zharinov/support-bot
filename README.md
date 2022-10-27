@@ -2,10 +2,20 @@
 Бот для Telegram и VK, отвечающий на самые распространенные вопросы пользователей. Поддерживает Dialogflow - облачный сервис распознавания естественного языка от Google. 
 
 
+### Примеры ботов
+[Бот в Telegram](https://t.me/dw_dvmn_support_bot)
+
+![telegram](https://user-images.githubusercontent.com/16899464/198251576-259f887b-ef31-4f2e-b543-e696a0efc1ae.gif)
+
+[Бот сообщества в VK](https://vk.com/club216670448)
+
+![vk](https://user-images.githubusercontent.com/16899464/198251603-950da316-359b-4470-9465-19f31004c617.gif)
+
+
 ### Установка
 1. Предварительно должен быть установлен Python3.
 2. Для установки зависимостей, используйте команду pip (или pip3, если есть конфликт с Python2) :
-```
+```shell
 pip install -r requirements.txt
 ```
 3. Необходимо [зарегистрировать бота и получить его API-токен](https://telegram.me/BotFather)
@@ -19,20 +29,22 @@ pip install -r requirements.txt
 - `TG_CHAT_ID` — id чата, куда будут отправляться логи (можно узнать у @userinfobot).
 
 
-### Запуск Telegram бота 
-```
+### Запуск ботов 
+
+Запуск Telegram бота :
+```shell
 $ python tg_bot.py
 ```
 
-### Запуск бота Вконтакте 
-```
+Запуск бота Вконтакте :
+```shell
 $ python vk_bot.py
 ```
 
 ### Обучение DialogFlow
 Чтобы научить бота обрабатывать запросы пользователя, нужно добавить в него Intents (намерения, цели). Можно сказать, что они должны соответствовать намерениям пользователя, который «общается» с чат-ботом
 Создайте .json файл в следующем формате:
-```
+```json
 {
     "Намерение": {
         "questions": [
@@ -45,6 +57,6 @@ $ python vk_bot.py
 ```
 
 Запустите скрипт для обучения Dialogflow, указав путь к json файлу:
-```
+```shell
 $ python dialogflow.py ./questions.json
 ```
