@@ -30,6 +30,16 @@ def answer_user(event, vk_api):
     )
 
 
+def run_bot(token):
+    vk_session = vk.VkApi(token=token)
+    vk_api = vk_session.get_api()
+    longpoll = VkLongPoll(vk_session)
+
+    for event in longpoll.listen():
+        if event.type == VkEventType.MESSAGE_NEW and event.to_me:
+            answer_user(event, vk_api)
+
+
 if __name__ == "__main__":
     load_dotenv()
     vk_token = os.getenv('VK_GROUP_TOKEN')
@@ -41,12 +51,7 @@ if __name__ == "__main__":
         TelegramLogsHandler(tg_bot_token, tg_chat_id)
     )
 
-    vk_session = vk.VkApi(token=vk_token)
-    vk_api = vk_session.get_api()
-    longpoll = VkLongPoll(vk_session)
-
-    for event in longpoll.listen():
-        if event.type == VkEventType.MESSAGE_NEW and event.to_me:
-            logger.info(f'New message from {event.user_id}')
-            answer_user(event, vk_api)
-            logger.info(f'Message text: {event.text}')
+    try:
+        run_bot(vk_token)
+    except Exception as err:
+        logger.exception(err)
