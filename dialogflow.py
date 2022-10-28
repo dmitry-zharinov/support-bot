@@ -4,6 +4,7 @@ import logging
 import os
 
 from dotenv import load_dotenv
+from google.cloud import dialogflow
 
 logger = logging.getLogger('dialogflow_bot')
 
@@ -12,8 +13,6 @@ def create_intent(project_id,
                   display_name,
                   training_phrases_parts,
                   message_texts):
-    from google.cloud import dialogflow
-
     intents_client = dialogflow.IntentsClient()
 
     parent = dialogflow.AgentsClient.agent_path(project_id)
@@ -40,8 +39,6 @@ def create_intent(project_id,
 
 
 def detect_intent_texts(project_id, session_id, texts, language_code="ru-RU"):
-    from google.cloud import dialogflow
-
     session_client = dialogflow.SessionsClient()
     session = session_client.session_path(project_id, session_id)
 
